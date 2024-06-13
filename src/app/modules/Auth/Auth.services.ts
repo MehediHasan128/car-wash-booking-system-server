@@ -6,6 +6,6 @@ const SingUpUserIntoDB = async (payload: TUser) => {
   return result;
 };
 
-export const SignUpServices = {
+export const AuthServices = {
   SingUpUserIntoDB,
 };
