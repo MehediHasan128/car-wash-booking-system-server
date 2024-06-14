@@ -6,21 +6,23 @@ import httpStatus from 'http-status';
 import jwt from 'jsonwebtoken';
 
 const SingUpUserIntoDB = async (payload: TUserSignUp) => {
-  const result = await User.create(payload);
+  const user = await User.create(payload);
+
+  const result = await User.findById(user._id).select('-password');
   return result;
 };
 
 const loginUserIntoDB = async (payload: TUserLogin) => {
 
   const user = await User.isUserExistsByEmail(payload.email);
+  const userData = await User.findById(user._id).select('-password');
 
+  // Checking the is exists
   if(!user){
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !')
   }
 
   // Checking if the password is correct
-
-
   if(!(await User.isPasswordMatched(payload?.password, user?.password))){
     throw new AppError(httpStatus.FORBIDDEN, 'Incorrect Password')
   }
@@ -34,7 +36,7 @@ const loginUserIntoDB = async (payload: TUserLogin) => {
 
   return {
     accessToken,
-    user
+    userData
   }
 };
 

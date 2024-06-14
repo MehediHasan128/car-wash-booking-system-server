@@ -8,8 +8,8 @@ const createSignupUser = async (req: Request, res: Response) => {
 
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
     success: true,
+    statusCode: httpStatus.OK,
     message: 'User registered successfully',
     data: result
   })
@@ -18,23 +18,14 @@ const createSignupUser = async (req: Request, res: Response) => {
 const loginUser = async(req: Request, res: Response) =>{
   const result = await AuthServices.loginUserIntoDB(req.body);
 
-  const {user, accessToken} = result
+  const {userData, accessToken} = result;
   
-  // sendResponse(res, {
-  //   statusCode: httpStatus.OK,
-  //   success: true,
-  //   message: 'User successfully logged in',
-  //   data: {
-  //     user
-  //   }
-  // })
-
-  res.send({
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
     success: true,
-    statusCode: 200,
-    message: 'User logged in successfully',
     token: accessToken,
-    data: user
+    message: 'User logged in successfully',
+    data: userData
   })
 }
 
