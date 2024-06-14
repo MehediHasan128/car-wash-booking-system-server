@@ -9,6 +9,6 @@ router.post('/', validationRequest(ServiceValidation.createServiceValidationSche
 router.get('/', ServiceController.getAllServices);
 router.get('/:id', ServiceController.getSingleServicesById);
 router.put('/:id', validationRequest(ServiceValidation.updateServiceValidationSchema), ServiceController.updateService);
-router.delete('/:id', ServiceController)
+router.delete('/:id', ServiceController.deleteService);
 
 export const ServicesRouter = router;
