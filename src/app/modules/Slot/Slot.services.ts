@@ -25,9 +25,19 @@ const { service, date, startTime, endTime } = payload;
   }
 
   return slots;
+};
+
+const getAllSlotsFromDB = async(date: string, serviceId: string) =>{
+    const result = (date && serviceId)? await Slots.find({
+        date: date,
+        service: serviceId
+    }).populate('service') : await Slots.find().populate('service') 
+
+    return result;
 }
 
 
 export const SlotServices = {
-    createSlotsIntoDB
+    createSlotsIntoDB,
+    getAllSlotsFromDB
 }

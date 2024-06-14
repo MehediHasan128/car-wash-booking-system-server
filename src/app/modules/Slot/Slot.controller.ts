@@ -14,7 +14,21 @@ const createSlot = async(req: Request, res: Response) =>{
     })
 };
 
+const getSlots = async(req: Request, res: Response) =>{
+    const {date, serviceId} = req.query;
+
+    const data = await SlotServices.getAllSlotsFromDB(date as string, serviceId as string)
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'Available slots retrieved successfully',
+        data: data
+    })
+}
+
 
 export const SlotController = {
-    createSlot
+    createSlot,
+    getSlots
 }
