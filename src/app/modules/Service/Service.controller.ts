@@ -14,6 +14,16 @@ const createService = async(req: Request, res: Response) =>{
     })
 };
 
+const getAllServices = async(req: Request, res: Response) =>{
+    const data = await CarWashServices.getAllServicesFromDB();
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'Service retrieved successfully',
+        data: data
+    })
+}
 
 const getSingleServicesById = async(req: Request, res: Response) =>{
     const {id} = req.params;
@@ -30,5 +40,6 @@ const getSingleServicesById = async(req: Request, res: Response) =>{
 
 export const ServiceController = {
     createService,
-    getSingleServicesById
+    getSingleServicesById,
+    getAllServices
 }

@@ -6,6 +6,11 @@ const createServiceIntoDB = async(payload: TService) =>{
     return result;
 }
 
+const getAllServicesFromDB = async() =>{
+    const result = await Services.find();
+    return result;
+}
+
 const getServiceById = async(serviceId: string) =>{
     const result = await Services.findById(serviceId);
     return result;
@@ -14,5 +19,6 @@ const getServiceById = async(serviceId: string) =>{
 
 export const CarWashServices = {
     createServiceIntoDB,
-    getServiceById
+    getServiceById,
+    getAllServicesFromDB
 }
