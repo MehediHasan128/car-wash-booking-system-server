@@ -8,5 +8,7 @@ const router = express.Router();
 router.post('/', validationRequest(ServiceValidation.createServiceValidationSchema), ServiceController.createService);
 router.get('/', ServiceController.getAllServices);
 router.get('/:id', ServiceController.getSingleServicesById);
+router.put('/:id', validationRequest(ServiceValidation.updateServiceValidationSchema), ServiceController.updateService);
+router.delete('/:id', ServiceController)
 
 export const ServicesRouter = router;

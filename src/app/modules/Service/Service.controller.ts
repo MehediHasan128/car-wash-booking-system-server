@@ -37,9 +37,22 @@ const getSingleServicesById = async(req: Request, res: Response) =>{
     })
 }
 
+const updateService = async(req: Request, res: Response) =>{
+    const {id} = req.params;
+    const data = await CarWashServices.updateServiceById(id, req.body);
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'Service updated successfully',
+        data: data
+    })
+}
+
 
 export const ServiceController = {
     createService,
     getSingleServicesById,
-    getAllServices
+    getAllServices,
+    updateService
 }
