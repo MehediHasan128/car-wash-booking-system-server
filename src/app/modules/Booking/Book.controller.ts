@@ -28,7 +28,8 @@ const getAllBooking = CatchAsync(async(req, res) =>{
 });
 
 const userBooking = CatchAsync(async(req, res) =>{
-    const data = await BookingServices.getUserBooking();
+
+    const data = await BookingServices.getUserBooking(req.user.userEmail);
 
     sendResponse(res, {
         success: true,
