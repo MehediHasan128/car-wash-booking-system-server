@@ -19,6 +19,6 @@ export type TBooking = {
     vehicleType: TVehicle;
     vehicleBrand: string;
     vehicleModel: string;
-    manufacturingYear: string;
+    manufacturingYear: number;
     registrationPlate: string;
 }

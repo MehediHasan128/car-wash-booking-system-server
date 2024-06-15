@@ -24,7 +24,7 @@ const createBookingSchema = new Schema<TBooking>({
         required: [true, 'Model is required']
     },
     manufacturingYear: {
-        type: String,
+        type: Number,
         required: [true, 'Manufacturing year is required']
     },
     registrationPlate: {
