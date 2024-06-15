@@ -13,7 +13,7 @@ export type TVehicle =
   | 'tractor';
 
 export type TBooking = {
-    customer: Types.ObjectId;
+    customer: object;
     serviceId: Types.ObjectId;
     slotId: Types.ObjectId;
     vehicleType: TVehicle;

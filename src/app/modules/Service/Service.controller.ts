@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
 import { CarWashServices } from "./Service.services";
 import { sendResponse } from "../../utils/SendResponse";
 import httpStatus from "http-status";
+import CatchAsync from "../../utils/CatchAsync";
 
-const createService = async(req: Request, res: Response) =>{
+const createService = CatchAsync(async(req, res) =>{
     const data = await CarWashServices.createServiceIntoDB(req.body);
 
     sendResponse(res, {
@@ -12,9 +12,9 @@ const createService = async(req: Request, res: Response) =>{
         message: 'Service created successfully',
         data: data
     })
-};
+})
 
-const getAllServices = async(req: Request, res: Response) =>{
+const getAllServices = CatchAsync(async(req, res) =>{
     const data = await CarWashServices.getAllServicesFromDB();
 
     sendResponse(res, {
@@ -23,9 +23,9 @@ const getAllServices = async(req: Request, res: Response) =>{
         message: 'Service retrieved successfully',
         data: data
     })
-}
+})
 
-const getSingleServicesById = async(req: Request, res: Response) =>{
+const getSingleServicesById = CatchAsync(async(req, res) =>{
     const {id} = req.params;
     const data = await CarWashServices.getServiceById(id);
 
@@ -35,9 +35,9 @@ const getSingleServicesById = async(req: Request, res: Response) =>{
         message: 'Service retrieved successfully',
         data: data
     })
-}
+})
 
-const updateService = async(req: Request, res: Response) =>{
+const updateService = CatchAsync(async(req, res) =>{
     const {id} = req.params;
     const data = await CarWashServices.updateServiceById(id, req.body);
 
@@ -47,9 +47,9 @@ const updateService = async(req: Request, res: Response) =>{
         message: 'Service updated successfully',
         data: data
     })
-}
+})
 
-const deleteService = async(req: Request, res: Response) =>{
+const deleteService = CatchAsync(async(req, res) =>{
     const {id} = req.params;
     const data = await CarWashServices.deleteServiceById(id);
 
@@ -59,7 +59,7 @@ const deleteService = async(req: Request, res: Response) =>{
         message: 'Service deleted successfully',
         data: data
     })
-}
+})
 
 
 export const ServiceController = {

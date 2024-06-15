@@ -2,10 +2,9 @@ import { Schema, model } from "mongoose";
 import { TBooking } from "./Book.interface";
 
 const createBookingSchema = new Schema<TBooking>({
-    // customer: {
-    //     type: Schema.Types.ObjectId,
-    //     ref:'User'
-    // },
+    customer: {
+        type: Object,
+    },
     serviceId: {
         type: Schema.Types.ObjectId,
         required: [true, 'Service id is required'],

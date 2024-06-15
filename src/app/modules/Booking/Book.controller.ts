@@ -1,10 +1,12 @@
-import { Request, Response } from "express";
 import { BookingServices } from "./Book.services";
 import { sendResponse } from "../../utils/SendResponse";
 import httpStatus from "http-status";
+import CatchAsync from "../../utils/CatchAsync";
 
-const createBooking = async(req: Request, res: Response) =>{
-    const data = await BookingServices.createBookinIntoDB(req.body);
+const createBooking = CatchAsync(async(req, res) =>{
+    const email = req.user.userEmail;
+
+    const data = await BookingServices.createBookinIntoDB(email, req.body);
 
     sendResponse(res, {
         success: true,
@@ -12,10 +14,9 @@ const createBooking = async(req: Request, res: Response) =>{
         message: 'Booking successful',
         data: data
     })
-};
+})
 
-
-const getAllBooking = async(req: Request, res: Response) =>{
+const getAllBooking = CatchAsync(async(req, res) =>{
     const data = await BookingServices.getAllBookingFromDB();
 
     sendResponse(res, {
@@ -24,10 +25,22 @@ const getAllBooking = async(req: Request, res: Response) =>{
         message: 'All bookings retrieved successfully',
         data: data
     })
-}
+});
+
+const userBooking = CatchAsync(async(req, res) =>{
+    const data = await BookingServices.getUserBooking();
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'User bookings retrieved successfully',
+        data: data
+    })
+})
 
 
 export const BookingController = {
     createBooking,
-    getAllBooking
+    getAllBooking,
+    userBooking
 }

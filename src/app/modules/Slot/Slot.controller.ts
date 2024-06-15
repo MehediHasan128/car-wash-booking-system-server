@@ -2,8 +2,11 @@ import { Request, Response } from "express";
 import { SlotServices } from "./Slot.services";
 import { sendResponse } from "../../utils/SendResponse";
 import httpStatus from "http-status";
+import CatchAsync from "../../utils/CatchAsync";
 
-const createSlot = async(req: Request, res: Response) =>{
+
+
+const createSlot = CatchAsync(async(req, res) =>{
     const result = await SlotServices.createSlotsIntoDB(req.body);
 
     sendResponse(res, {
@@ -12,9 +15,9 @@ const createSlot = async(req: Request, res: Response) =>{
         message: 'Slots created successfully',
         data: result
     })
-};
+})
 
-const getSlots = async(req: Request, res: Response) =>{
+const getSlots = CatchAsync(async(req, res) =>{
     const {date, serviceId} = req.query;
 
     const data = await SlotServices.getAllSlotsFromDB(date as string, serviceId as string)
@@ -25,7 +28,7 @@ const getSlots = async(req: Request, res: Response) =>{
         message: 'Available slots retrieved successfully',
         data: data
     })
-}
+})
 
 
 export const SlotController = {
