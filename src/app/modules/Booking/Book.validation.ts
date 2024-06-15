@@ -10,7 +10,6 @@ const createBookingValidationSchema = z.object({
   }),
 });
 
-
 export const BookingValidation = {
-    createBookingValidationSchema
-}
+  createBookingValidationSchema,
+};

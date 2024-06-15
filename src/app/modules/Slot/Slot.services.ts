@@ -1,9 +1,8 @@
-import { TSlot } from "./Slot.interface";
-import { Slots } from "./Slot.model";
+import { TSlot } from './Slot.interface';
+import { Slots } from './Slot.model';
 
-const createSlotsIntoDB = async(payload: TSlot) =>{
-
-const { service, date, startTime, endTime } = payload;
+const createSlotsIntoDB = async (payload: TSlot) => {
+  const { service, date, startTime, endTime } = payload;
   const slots: TSlot[] = [];
 
   const timeStart = parseInt(startTime.split(':')[0], 10);
@@ -17,7 +16,7 @@ const { service, date, startTime, endTime } = payload;
       service,
       date,
       startTime: slotStartTime,
-      endTime: slotEndTime
+      endTime: slotEndTime,
     });
 
     const savedSlot = await newSlot.save();
@@ -27,17 +26,19 @@ const { service, date, startTime, endTime } = payload;
   return slots;
 };
 
-const getAllSlotsFromDB = async(date: string, serviceId: string) =>{
-    const result = (date && serviceId)? await Slots.find({
-        date: date,
-        service: serviceId
-    }).populate('service') : await Slots.find().populate('service') 
+const getAllSlotsFromDB = async (date: string, serviceId: string) => {
+  const result =
+    date && serviceId
+      ? await Slots.find({
+          date: date,
+          service: serviceId,
+        }).populate('service')
+      : await Slots.find().populate('service');
 
-    return result;
-}
-
+  return result;
+};
 
 export const SlotServices = {
-    createSlotsIntoDB,
-    getAllSlotsFromDB
-}
+  createSlotsIntoDB,
+  getAllSlotsFromDB,
+};

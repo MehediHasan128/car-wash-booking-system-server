@@ -7,7 +7,12 @@ import { user_role } from '../Auth/Auth.constant';
 
 const router = express.Router();
 
-router.post('/services/slots', auth(user_role.admin), validationRequest(SlotValidation.createSlotValidationSchema), SlotController.createSlot)
-router.get('/slots/availability', SlotController.getSlots)
+router.post(
+  '/services/slots',
+  auth(user_role.admin),
+  validationRequest(SlotValidation.createSlotValidationSchema),
+  SlotController.createSlot,
+);
+router.get('/slots/availability', SlotController.getSlots);
 
-export const SlotRouter = router
+export const SlotRouter = router;

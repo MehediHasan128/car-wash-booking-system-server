@@ -13,34 +13,37 @@ const SingUpUserIntoDB = async (payload: TUserSignUp) => {
 };
 
 const loginUserIntoDB = async (payload: TUserLogin) => {
-
   const user = await User.isUserExistsByEmail(payload.email);
   const userData = await User.findById(user._id).select('-password');
 
   // Checking the is exists
-  if(!user){
-    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !')
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
   }
 
   // Checking if the password is correct
-  if(!(await User.isPasswordMatched(payload?.password, user?.password))){
-    throw new AppError(httpStatus.FORBIDDEN, 'Incorrect Password')
+  if (!(await User.isPasswordMatched(payload?.password, user?.password))) {
+    throw new AppError(httpStatus.FORBIDDEN, 'Incorrect Password');
   }
 
   const jwtpayload = {
     userEmail: user.email,
-    userRole: user.role
-  }
+    userRole: user.role,
+  };
 
-  const accessToken = jwt.sign(jwtpayload, config.jwt_token_secret as string, {expiresIn: '1d'})
+  const token = jwt.sign(jwtpayload, config.jwt_token_secret as string, {
+    expiresIn: '1d',
+  });
+
+  const accessToken = `Bearer ${token}`;
 
   return {
     accessToken,
-    userData
-  }
+    userData,
+  };
 };
 
 export const AuthServices = {
   SingUpUserIntoDB,
-  loginUserIntoDB
+  loginUserIntoDB,
 };

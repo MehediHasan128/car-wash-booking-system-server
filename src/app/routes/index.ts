@@ -27,4 +27,4 @@ const modelRouter = [
 
 modelRouter.forEach((route) => router.use(route.path, route.route));
 
-export default router
+export default router;

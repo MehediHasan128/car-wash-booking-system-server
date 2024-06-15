@@ -9,7 +9,6 @@ const createSlotValidationSchema = z.object({
   }),
 });
 
-
 export const SlotValidation = {
-    createSlotValidationSchema
-}
+  createSlotValidationSchema,
+};

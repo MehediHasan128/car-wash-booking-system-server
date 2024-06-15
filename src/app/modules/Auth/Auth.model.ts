@@ -47,11 +47,14 @@ createUserSchema.pre('save', async function (next) {
   next();
 });
 
-createUserSchema.statics.isUserExistsByEmail = async function(email: string){
-  return await User.findOne({email});
-}
-createUserSchema.statics.isPasswordMatched = async function(password, hashedPassword){
+createUserSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await User.findOne({ email });
+};
+createUserSchema.statics.isPasswordMatched = async function (
+  password,
+  hashedPassword,
+) {
   return await bcrypt.compare(password, hashedPassword);
-}
+};
 
 export const User = model<TUserSignUp, UserModel>('User', createUserSchema);

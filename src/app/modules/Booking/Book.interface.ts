@@ -1,4 +1,4 @@
-import { Types } from "mongoose"
+import { Types } from 'mongoose';
 
 export type TVehicle =
   | 'car'
@@ -13,12 +13,12 @@ export type TVehicle =
   | 'tractor';
 
 export type TBooking = {
-    customer: object;
-    serviceId: Types.ObjectId;
-    slotId: Types.ObjectId;
-    vehicleType: TVehicle;
-    vehicleBrand: string;
-    vehicleModel: string;
-    manufacturingYear: number;
-    registrationPlate: string;
-}
+  customer: object;
+  serviceId: Types.ObjectId;
+  slotId: Types.ObjectId;
+  vehicleType: TVehicle;
+  vehicleBrand: string;
+  vehicleModel: string;
+  manufacturingYear: number;
+  registrationPlate: string;
+};
